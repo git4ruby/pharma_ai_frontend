@@ -107,12 +107,16 @@ onMounted(async () => {
       queryService.getAll()
     ])
 
-    stats.value.documents = docsRes.data?.documents?.length || 0
-    stats.value.queries = queriesRes.data?.length || 0
+    // Fix: Backend returns data in data.data, but sometimes just data
+    const docs = Array.isArray(docsRes.data.data) ? docsRes.data.data : docsRes.data
+    const queries = Array.isArray(queriesRes.data.data) ? queriesRes.data.data : queriesRes.data
 
-    if (queriesRes.data?.length > 0) {
-      const total = queriesRes.data.reduce((sum, q) => sum + (q.processing_time || 0), 0)
-      stats.value.avgProcessingTime = (total / queriesRes.data.length).toFixed(1)
+    stats.value.documents = docs?.length || 0
+    stats.value.queries = queries?.length || 0
+
+    if (queries?.length > 0) {
+      const total = queries.reduce((sum, q) => sum + (q.processing_time || 0), 0)
+      stats.value.avgProcessingTime = (total / queries.length).toFixed(1)
     }
   } catch (error) {
     console.error('Failed to fetch stats:', error)
