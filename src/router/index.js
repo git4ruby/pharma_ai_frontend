@@ -62,6 +62,12 @@ const routes = [
         name: 'AdminCompliance',
         component: () => import('@/views/admin/Compliance.vue'),
         meta: { requiresAdmin: true }
+      },
+      {
+        path: 'query-audit',
+        name: 'QueryAudit',
+        component: () => import('@/views/QueryAudit.vue'),
+        meta: { requiresAuditor: true }
       }
     ]
   }
@@ -72,12 +78,19 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
+
+  // If user is authenticated but user data not loaded, fetch it first
+  if (authStore.isAuthenticated && !authStore.user) {
+    await authStore.fetchCurrentUser()
+  }
 
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     next('/login')
   } else if (to.meta.requiresAdmin && authStore.user?.role !== 'admin') {
+    next('/')
+  } else if (to.meta.requiresAuditor && !['admin', 'auditor'].includes(authStore.user?.role)) {
     next('/')
   } else if (to.path === '/login' && authStore.isAuthenticated) {
     next('/')

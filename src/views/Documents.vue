@@ -98,7 +98,10 @@ async function fetchDocuments() {
   try {
     loading.value = true
     const response = await documentService.getAll()
-    documents.value = response.data?.documents || []
+    // Backend returns { status: {...}, data: [...] }
+    // So we need response.data.data, but if data is already the array, use it directly
+    const docs = Array.isArray(response.data.data) ? response.data.data : response.data
+    documents.value = docs || []
   } catch (error) {
     console.error('Failed to fetch documents:', error)
   } finally {

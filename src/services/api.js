@@ -111,3 +111,15 @@ export const adminService = {
     return response.data
   }
 }
+
+export const queryAuditService = {
+  async getAll(params = {}) {
+    const response = await api.get('/api/query-audits', { params })
+    return response.data
+  },
+
+  async getStatistics() {
+    const response = await api.get('/api/query-audits/statistics')
+    return response.data
+  }
+}

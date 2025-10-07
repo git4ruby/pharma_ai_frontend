@@ -2,7 +2,9 @@
   <div class="dashboard-layout">
     <aside class="sidebar">
       <div class="sidebar-header">
-        <h2>PharmaAI</h2>
+        <router-link to="/" class="logo-link">
+          <h2>PharmaAI</h2>
+        </router-link>
       </div>
 
       <nav class="sidebar-nav">
@@ -24,6 +26,11 @@
         <router-link to="/queries" class="nav-item">
           <span class="icon">💬</span>
           <span>Q&A</span>
+        </router-link>
+
+        <router-link v-if="authStore.isAdmin || authStore.isAuditor" to="/query-audit" class="nav-item">
+          <span class="icon">🔍</span>
+          <span>Query Audit</span>
         </router-link>
 
         <div v-if="authStore.isAdmin" class="nav-divider"></div>
@@ -139,6 +146,11 @@ async function handleLogout() {
 .sidebar-header {
   padding: 24px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo-link {
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .sidebar-header h2 {
