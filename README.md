@@ -58,7 +58,7 @@ Asclepius AI Frontend provides an intuitive interface for uploading, managing, a
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/git4ruby/pharma_ai_frontend.git
+git clone git@github.com:git4ruby/pharma_ai_frontend.git
 cd pharma_ai_frontend
 ```
 
