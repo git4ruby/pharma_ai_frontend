@@ -262,4 +262,4 @@ Maximum file size: 50MB per file. Larger files will be rejected.
 
 ## License
 
-MIT License - see LICENSE file for details
+Apache License 2.0 - see LICENSE file for details
