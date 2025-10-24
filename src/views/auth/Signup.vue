@@ -2,7 +2,7 @@
   <div class="auth-container">
     <div class="auth-card">
       <div class="auth-header">
-        <h1>PharmaAI</h1>
+        <h1>Asclepius AI</h1>
         <p>Create your account</p>
       </div>
 

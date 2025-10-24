@@ -4,7 +4,7 @@ describe('Authentication Flow', () => {
   })
 
   it('should display login page', () => {
-    cy.contains('h1', 'PharmaAI').should('be.visible')
+    cy.contains('h1', 'Asclepius AI').should('be.visible')
     cy.contains('HIPAA-Compliant Document Q&A System').should('be.visible')
     cy.get('input[type="email"]').should('be.visible')
     cy.get('input[type="password"]').should('be.visible')
@@ -26,7 +26,7 @@ describe('Authentication Flow', () => {
   it('should navigate to signup page', () => {
     cy.contains('a', 'Sign up').click()
     cy.url().should('include', '/signup')
-    cy.contains('h1', 'PharmaAI').should('be.visible')
+    cy.contains('h1', 'Asclepius AI').should('be.visible')
     cy.contains('Create your account').should('be.visible')
   })
 

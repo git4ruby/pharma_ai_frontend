@@ -51,7 +51,7 @@ Asclepius AI Frontend provides an intuitive interface for uploading, managing, a
 ## Prerequisites
 
 - Node.js 18+ and npm
-- Access to PharmaAI Backend API (Rails)
+- Access to Asclepius AI Backend API (Rails)
 
 ## Installation
 

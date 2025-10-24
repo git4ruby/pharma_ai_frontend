@@ -1,4 +1,4 @@
-// Custom Cypress commands for PharmaAI
+// Custom Cypress commands for Asclepius AI
 
 Cypress.Commands.add('login', (email = 'admin@example.com', password = 'Password123!') => {
   cy.visit('/login')

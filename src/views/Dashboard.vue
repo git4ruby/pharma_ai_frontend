@@ -2,7 +2,7 @@
   <div class="dashboard">
     <div class="dashboard-header">
       <h1>Welcome back, {{ authStore.user?.first_name }}!</h1>
-      <p>Here's your PharmaAI overview</p>
+      <p>Here's your Asclepius AI overview</p>
     </div>
 
     <div class="stats-grid">

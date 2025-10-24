@@ -14,21 +14,21 @@ describe('Dashboard Navigation', () => {
   it('should have navigation menu items', () => {
     cy.visit('/login')
     // For now, just check login page structure
-    cy.contains('h1', 'PharmaAI').should('be.visible')
+    cy.contains('h1', 'Asclepius AI').should('be.visible')
     cy.contains('HIPAA-Compliant Document Q&A System').should('be.visible')
   })
 
   it('should display PharmaAI branding', () => {
     cy.visit('/login')
-    cy.contains('PharmaAI').should('be.visible')
+    cy.contains('Asclepius AI').should('be.visible')
   })
 
   it('should be responsive', () => {
     cy.viewport('iphone-x')
     cy.visit('/login')
-    cy.contains('PharmaAI').should('be.visible')
+    cy.contains('Asclepius AI').should('be.visible')
 
     cy.viewport('macbook-15')
-    cy.contains('PharmaAI').should('be.visible')
+    cy.contains('Asclepius AI').should('be.visible')
   })
 })
