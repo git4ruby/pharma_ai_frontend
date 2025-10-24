@@ -64,6 +64,12 @@ const routes = [
         meta: { requiresAdmin: true }
       },
       {
+        path: 'admin/background-jobs',
+        name: 'AdminBackgroundJobs',
+        component: () => import('@/views/admin/BackgroundJobs.vue'),
+        meta: { requiresAdmin: true }
+      },
+      {
         path: 'query-audit',
         name: 'QueryAudit',
         component: () => import('@/views/QueryAudit.vue'),

@@ -55,6 +55,11 @@
           <span class="icon">🔒</span>
           <span>Compliance</span>
         </router-link>
+
+        <router-link v-if="authStore.isAdmin" to="/admin/background-jobs" class="nav-item">
+          <span class="icon">⚙️</span>
+          <span>Background Jobs</span>
+        </router-link>
       </nav>
 
       <div class="sidebar-footer">
@@ -196,7 +201,7 @@ async function handleLogout() {
   color: white;
 }
 
-.nav-item.router-link-active {
+.nav-item.router-link-exact-active {
   background: rgba(102, 126, 234, 0.1);
   color: white;
   border-left: 3px solid #667eea;
