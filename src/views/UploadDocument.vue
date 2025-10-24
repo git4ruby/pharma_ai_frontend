@@ -298,7 +298,8 @@ async function handleUpload() {
         uploadedCount.value++
         uploadProgress.value = Math.round((uploadedCount.value / selectedFiles.value.length) * 100)
       } catch (err) {
-        failedFiles.push(file.name)
+        const errorMsg = err.response?.data?.status?.message || err.message || 'Unknown error'
+        failedFiles.push({ name: file.name, error: errorMsg })
         console.error(`Failed to upload ${file.name}:`, err)
       }
     }
@@ -311,8 +312,7 @@ async function handleUpload() {
         router.push('/documents')
       }, 2000)
     } else {
-      success.value = true
-      successMessage.value = `Uploaded ${uploadedCount.value} of ${selectedFiles.value.length} documents. Failed: ${failedFiles.join(', ')}`
+      error.value = `Uploaded ${uploadedCount.value} of ${selectedFiles.value.length} documents.\n\nFailed uploads:\n${failedFiles.map(f => `• ${f.name}: ${f.error}`).join('\n')}`
     }
   } catch (err) {
     error.value = 'Upload failed. Please try again.'
@@ -770,6 +770,7 @@ async function handleUpload() {
   border-radius: 6px;
   margin-bottom: 20px;
   font-size: 14px;
+  white-space: pre-line;
 }
 
 .success-message {

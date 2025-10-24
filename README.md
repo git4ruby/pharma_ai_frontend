@@ -1,14 +1,15 @@
-# PharmaAI Frontend
+# Asclepius AI Frontend
 
 A modern Vue.js 3 application for pharmaceutical document management with AI-powered Q&A capabilities.
 
 ## Overview
 
-PharmaAI Frontend provides an intuitive interface for uploading, managing, and querying pharmaceutical documents. The application features role-based access control (RBAC), HIPAA-compliant PHI handling, and real-time document processing monitoring.
+Asclepius AI Frontend provides an intuitive interface for uploading, managing, and querying pharmaceutical documents. The application features role-based access control (RBAC), HIPAA-compliant PHI handling, and real-time document processing monitoring.
 
 ## Features
 
 ### Document Management
+
 - **Batch Upload**: Upload multiple documents simultaneously with drag-and-drop support
 - **Classification Levels**: Public, Confidential, and Restricted access control
 - **PHI Handling**: HIPAA-compliant Protected Health Information management
@@ -16,12 +17,14 @@ PharmaAI Frontend provides an intuitive interface for uploading, managing, and q
 - **Search & Filter**: Advanced search capabilities across uploaded documents
 
 ### AI-Powered Q&A
+
 - Semantic search across document collections
 - Context-aware answers with source citations
 - Query history and audit trail
 - Multi-document querying
 
 ### Admin Features
+
 - **User Management**: Create, update, and manage user accounts and roles
 - **Analytics Dashboard**: Usage statistics, document metrics, and system health
 - **Audit Logs**: Comprehensive activity tracking for compliance
@@ -29,7 +32,8 @@ PharmaAI Frontend provides an intuitive interface for uploading, managing, and q
 - **Compliance Dashboard**: HIPAA compliance status and reports
 
 ### Security & Compliance
-- Role-based access control (Admin, Auditor, Researcher, Viewer)
+
+- Role-based access control (Admin, Auditor, Researcher, Doctor)
 - Session management with Redis
 - Inactivity timeout (15 minutes)
 - Audit logging for all sensitive operations
@@ -52,17 +56,20 @@ PharmaAI Frontend provides an intuitive interface for uploading, managing, and q
 ## Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd pharma_ai_frontend
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Configure environment variables:
+
 ```bash
 # Create .env file
 cp .env.example .env
@@ -74,20 +81,23 @@ VITE_API_URL=http://localhost:3000
 ## Development
 
 Start the development server:
+
 ```bash
 npm run dev
 ```
 
-The application will be available at `http://localhost:5173`
+The application will be available at `http://localhost:4000`
 
 ## Build
 
 Create a production build:
+
 ```bash
 npm run build
 ```
 
 Preview the production build:
+
 ```bash
 npm run preview
 ```
@@ -95,11 +105,13 @@ npm run preview
 ## Testing
 
 Run unit tests:
+
 ```bash
 npm run test
 ```
 
 Run tests with coverage:
+
 ```bash
 npm run test:coverage
 ```
@@ -113,12 +125,12 @@ src/
 ├── layouts/          # Layout components (DashboardLayout)
 ├── router/           # Vue Router configuration
 ├── services/         # API service layer
-│   └── api.js       # Axios instance and service methods
+│   └── api.js        # Axios instance and service methods
 ├── stores/           # Pinia stores
-│   └── auth.js      # Authentication state management
+│   └── auth.js       # Authentication state management
 ├── views/            # Page components
-│   ├── auth/        # Login, Signup
-│   ├── admin/       # Admin pages (Users, Analytics, Audit Logs, etc.)
+│   ├── auth/         # Login, Signup
+│   ├── admin/        # Admin pages (Users, Analytics, Audit Logs, etc.)
 │   ├── Dashboard.vue
 │   ├── Documents.vue
 │   ├── UploadDocument.vue
@@ -130,25 +142,31 @@ src/
 ## User Roles
 
 ### Admin
+
 - Full system access
 - User management
 - System configuration
 - All analytics and audit logs
 
 ### Auditor
+
 - Read-only access to query audit logs
 - View all queries and responses
 - Access compliance reports
 
 ### Researcher
-- Upload and manage documents
-- Query documents
-- View own uploaded documents
 
-### Viewer
-- Query public documents
-- View query results
-- Limited document access
+- Upload and manage own documents
+- Query all accessible documents
+- View own documents and public documents
+- Limited analytics
+
+### Doctor
+
+- Upload and manage own documents
+- Query all accessible documents
+- Access to PHI documents (only uploaded by them)
+- Full analytics access
 
 ## Key Features Guide
 
@@ -174,17 +192,20 @@ src/
 ### Admin Operations
 
 #### User Management
+
 - Create new users with specific roles
 - Update user information and permissions
 - Monitor user activity
 
 #### Background Jobs
+
 - View Sidekiq job statistics
 - Monitor document processing status
 - Retry or delete failed jobs
 - Track queue latency
 
 #### Analytics
+
 - Document upload trends
 - Query patterns and frequency
 - User activity metrics
@@ -196,13 +217,13 @@ The frontend communicates with the Rails backend API:
 
 ```javascript
 // Example API call
-import { documentService } from '@/services/api'
+import { documentService } from "@/services/api";
 
 // Upload document
-await documentService.upload(file, title, containsPhi, classification)
+await documentService.upload(file, title, containsPhi, classification);
 
 // Query documents
-const response = await documentService.query(question)
+const response = await documentService.query(question);
 ```
 
 ## Environment Variables
@@ -228,18 +249,17 @@ VITE_API_URL=http://localhost:3000    # Backend API URL
 ## Common Issues
 
 ### CORS Errors
+
 Ensure the backend API has CORS configured to allow requests from the frontend origin.
 
 ### Session Timeout
+
 Default inactivity timeout is 15 minutes. Users receive a warning at 13 minutes.
 
 ### File Upload Limits
+
 Maximum file size: 50MB per file. Larger files will be rejected.
 
 ## License
 
 MIT License - see LICENSE file for details
-
-## Support
-
-For issues or questions, please contact [your-support-email]

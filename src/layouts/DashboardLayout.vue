@@ -3,7 +3,7 @@
     <aside class="sidebar">
       <div class="sidebar-header">
         <router-link to="/" class="logo-link">
-          <h2>PharmaAI</h2>
+          <h2>Asclepius AI</h2>
         </router-link>
       </div>
 
@@ -25,7 +25,7 @@
 
         <router-link to="/queries" class="nav-item">
           <span class="icon">💬</span>
-          <span>Q&A</span>
+          <span>Asclepius AI</span>
         </router-link>
 
         <router-link v-if="authStore.isAdmin || authStore.isAuditor" to="/query-audit" class="nav-item">

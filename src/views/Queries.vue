@@ -1,7 +1,7 @@
 <template>
   <div class="queries-page">
     <div class="page-header">
-      <h1>Q&A Assistant</h1>
+      <h1>Asclepius AI</h1>
       <p>Ask questions about your pharmaceutical documents</p>
     </div>
 
@@ -10,7 +10,7 @@
         <div class="chat-messages" ref="messagesContainer">
           <div v-if="queries.length === 0" class="empty-chat">
             <div class="welcome-icon">💬</div>
-            <h2>Welcome to PharmaAI Q&A</h2>
+            <h2>Welcome to Asclepius AI</h2>
             <p>Ask any question about your uploaded documents</p>
             <ul class="example-questions">
               <li>What were the clinical trial results?</li>
