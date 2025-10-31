@@ -109,6 +109,11 @@ export const adminService = {
   async getComplianceStatus() {
     const response = await api.get('/api/compliance/status')
     return response.data
+  },
+
+  async importFromS3() {
+    const response = await api.post('/api/admin/s3/import')
+    return response.data
   }
 }
 

@@ -5,9 +5,19 @@
         <h1>Document Library</h1>
         <p>View and manage your uploaded documents</p>
       </div>
-      <router-link to="/upload" class="btn-primary">
-        ⬆️ Upload New
-      </router-link>
+      <div class="header-actions">
+        <button
+          v-if="canImportFromS3"
+          @click="handleImportFromS3"
+          class="btn-primary"
+          :disabled="importing"
+        >
+          {{ importing ? 'Checking S3...' : '☁️ Check S3 Now' }}
+        </button>
+        <router-link to="/upload" class="btn-primary">
+          ⬆️ Upload New
+        </router-link>
+      </div>
     </div>
 
     <div v-if="loading" class="loading">
@@ -81,14 +91,16 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
-import { documentService } from '@/services/api'
+import { documentService, adminService } from '@/services/api'
 
 const authStore = useAuthStore()
 const documents = ref([])
 const loading = ref(true)
 const deleting = ref(null)
+const importing = ref(false)
 
 const canDelete = computed(() => authStore.isAdmin)
+const canImportFromS3 = computed(() => authStore.isAdmin)
 
 onMounted(async () => {
   await fetchDocuments()
@@ -122,6 +134,26 @@ async function handleDelete(id) {
     alert('Failed to delete document')
   } finally {
     deleting.value = null
+  }
+}
+
+async function handleImportFromS3() {
+  try {
+    importing.value = true
+    const response = await adminService.importFromS3()
+
+    // Show success message
+    alert(response.data.message || 'S3 import job queued successfully. New documents will appear shortly.')
+
+    // Refresh the document list after a short delay
+    setTimeout(() => {
+      fetchDocuments()
+    }, 2000)
+  } catch (error) {
+    console.error('Failed to import from S3:', error)
+    alert('Failed to queue S3 import job. Please try again.')
+  } finally {
+    importing.value = false
   }
 }
 
@@ -173,6 +205,12 @@ function formatDate(dateString) {
   color: #718096;
 }
 
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
 .btn-primary {
   padding: 12px 24px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -184,6 +222,11 @@ function formatDate(dateString) {
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .loading {
