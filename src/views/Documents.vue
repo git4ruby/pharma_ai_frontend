@@ -59,6 +59,16 @@
           </div>
 
           <div class="meta-item">
+            <span class="meta-label">Owner:</span>
+            <span>{{ doc.user?.full_name || doc.user?.email || 'Unknown' }}</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Role:</span>
+            <span class="role-badge">{{ doc.user?.role || 'N/A' }}</span>
+          </div>
+
+          <div class="meta-item">
             <span class="meta-label">Size:</span>
             <span>{{ formatFileSize(doc.file_size) }}</span>
           </div>
@@ -350,6 +360,16 @@ function formatDate(dateString) {
   font-size: 12px;
   font-weight: 600;
   text-transform: capitalize;
+}
+
+.role-badge {
+  padding: 4px 12px;
+  background: #e6f7ff;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: #0050b3;
 }
 
 .phi-badge {
